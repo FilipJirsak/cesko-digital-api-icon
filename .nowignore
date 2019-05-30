@@ -1,0 +1,9 @@
+/.gradle/
+/.idea/
+/src/
+/gradle/
+/build.gradle
+/gradlew
+/gradlew.bat
+/build/*/**
+!/build/distributions/*.zip

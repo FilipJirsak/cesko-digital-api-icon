@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(
+            'com.amazonaws:aws-lambda-java-events:2.2.6',
+
+            'org.dom4j:dom4j:2.1.1',
+            'net.sf.saxon:Saxon-HE:9.9.1-3',
+    )
+
+    compileOnly(
+            'com.amazonaws:aws-lambda-java-core:1.2.0',
+    )
+}
+
+task buildZip(type: Zip) {
+    archiveFileName = 'cesko-digital-api-icon.zip'
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.runtimeClasspath
+    }
+}
+
+build.dependsOn buildZip
+
+tasks.withType(JavaCompile) {
+    options.incremental = true
+    options.encoding = 'UTF-8'
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << '-proc:none' << '-parameters'
+}

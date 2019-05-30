@@ -1,0 +1,15 @@
+{
+  "name": "cesko.digital.api",
+  "version": 2,
+  "builds": [
+    {
+      "src": "build/distributions/cesko-digital-api-icon.zip",
+      "use": "@now/lambda",
+      "config": {
+        "handler": "cesko.digital.api.icon.IconHandler::handleRequest",
+        "runtime": "java-1.8.0-openjdk",
+        "maxLambdaSize": "6mb"
+      }
+    }
+  ]
+}
